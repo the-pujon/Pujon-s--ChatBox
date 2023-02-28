@@ -1,0 +1,509 @@
+@use "./util/sass/variable";
+
+//for full website
+* {
+    margin: 0;
+    padding: 0;
+}
+
+//for commonly used classes
+//for login and register components
+
+.formContainer {
+    background: rgb(255, 239, 0);
+    background: url(images/background.jpg)no-repeat center center fixed;
+
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .formWrapper {
+        background-color: rgba(256, 256, 256, .09);
+
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px dotted rgba(255, 255, 255, 0.311);
+        border-radius: 1rem;
+
+        //for logo in login and register
+        .logo {
+            img {
+                height: 8rem;
+                border-radius: 50%;
+            }
+        }
+
+        //login and register page title
+        .title {
+            color: rgb(255, 255, 255);
+        }
+
+        //login and register page form
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            input {
+                width: 18rem;
+                padding: 0.4rem 1rem;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.51);
+                color: white;
+
+                &::placeholder {
+                    color: rgba(250, 250, 250, 0.77);
+                }
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                cursor: pointer;
+
+                img {
+                    width: 3rem;
+                }
+
+                span {
+                    color: rgba(255, 255, 255, 0.77);
+
+                }
+            }
+
+            p {
+                span {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        //footer in login and register page
+        p {
+            color: rgba(255, 255, 255, 0.638);
+
+            span {
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+                border-bottom: 0.1rem solid transparent;
+                transition: 0.5s;
+
+                &:hover {
+                    border-bottom: 0.1rem solid rgb(255, 255, 255);
+                }
+            }
+        }
+    }
+}
+
+
+
+//homepage
+.home {
+    background: rgb(255, 239, 0);
+    background: url(images/background.jpg)no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .container {
+        border: 1px solid white;
+        border-radius: .5rem;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+
+
+
+        //for sidebar
+        .sidebar {
+
+            width: 33%;
+            border-right: 1px solid white;
+            background-color: rgba(0, 0, 0, 0.234);
+            backdrop-filter: blur(2px);
+            position: relative;
+
+            //for navbar in sidebar
+            .nav {
+                background-color: rgba(225, 225, 225, 0.381);
+                border-bottom: 1px dotted white;
+                padding: .5rem;
+                display: flex;
+                justify-content: space-between;
+                height: 2rem;
+                align-items: center;
+                color: white;
+
+                //logo in navbar
+                .logo {
+                    img {
+                        height: 2.5rem;
+                        border-radius: 50%;
+                    }
+                }
+
+                //for user after login
+                .user {
+                    display: flex;
+                    align-items: center;
+
+                    gap: .4rem;
+
+                    //user image
+                    img {
+                        background-color: aqua;
+                        width: 2rem;
+                        height: 2rem;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        span {
+                            display: none;
+                        }
+                    }
+
+
+                }
+
+                //for log out button
+                button {
+                    padding: 4px;
+                    border: none;
+                    border-radius: 5px;
+                    color: white;
+                    background-color: rgba(0, 0, 0, 0.529);
+                    font-weight: 500;
+                    transition: .7s;
+
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(0, 0, 0, 0.212);
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    button {
+                        position: absolute;
+                        bottom: 0;
+                    }
+                }
+            }
+
+
+            //for search in sidebar
+            .search {
+                border-bottom: 3px double rgb(255, 255, 255);
+
+                .FormSearch {
+                    padding: 10px;
+
+                    input {
+                        background-color: transparent;
+                        color: white;
+                        border: none;
+                        outline: none;
+                        width: 100%;
+
+
+                        &::placeholder {
+                            color: lightgray;
+                        }
+                    }
+                }
+            }
+
+            //for message selection in sidebar
+            .userMassage {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                padding: 10px;
+                color: white;
+                cursor: pointer;
+                transition: .5s;
+                background-color: #ffffff29;
+
+                @media screen and (max-width: 768px) {
+                    .userMassageInfo {
+                        display: none;
+                    }
+                }
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.558);
+                }
+
+                @media screen and (max-width: 768px) {
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                    }
+                }
+
+                //show new message in message selection
+                .userMassageInfo {
+                    span {
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                    }
+
+                    p {
+                        color: lightgray;
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 25%;
+            }
+        }
+
+        //for chats
+        .chat {
+            flex: 2;
+            backdrop-filter: blur(2px);
+
+
+
+            //for chats navbar
+            .chatInfo {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: rgb(255, 255, 255);
+                padding: .5rem;
+                background-color: rgba(0, 0, 0, .4);
+                height: 2rem;
+                border-bottom: 1px dotted white;
+
+
+                .chatIcons {
+                    display: flex;
+                    gap: 1rem;
+                    cursor: pointer;
+
+
+                    img {
+                        height: 1.2rem;
+                    }
+                }
+            }
+
+
+            //for messages that will show after send
+            //all message
+            .massages {
+                background-color: rgba(0, 0, 0, 0.244);
+                padding: 0.5rem;
+                height: calc(100% - 7.5rem);
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                overflow: scroll;
+                overflow-x: hidden;
+                overflow: auto;
+
+                //for scrollbar
+                &::-webkit-scrollbar {
+                    width: 5px;
+                    height: 5px;
+                    cursor: pointer;
+                }
+
+                /* Track */
+                &::-webkit-scrollbar-track {
+                    background: #f00202;
+                    display: none;
+
+                }
+
+                /* Handle */
+                &::-webkit-scrollbar-thumb {
+                    background: #ffffff;
+                    border-radius: 4px;
+                    width: 1px;
+                }
+
+                /* Handle on hover */
+                &::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+
+
+                //for each message
+                .massage {
+                    display: flex;
+                    gap: 1rem;
+
+                    //for user image
+                    .massageInfo {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.2rem;
+                        color: rgb(128, 126, 126);
+
+                        span {
+                            font-weight: 300;
+                            width: max-content;
+                            //font-size: 1rem;
+                        }
+
+                        img {
+                            width: 3rem;
+                            height: 3rem;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+
+                    }
+
+                    //for user sended messages and images
+                    .massageContent {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .5rem;
+
+                        p {
+                            background-color: white;
+                            padding: .7rem;
+                            border-radius: 0 10px 10px 10px;
+                            max-width: 300px;
+                            overflow: auto;
+
+                            &::-webkit-scrollbar {
+                                width: 20px;
+                                height: 5px;
+                                cursor: pointer;
+                            }
+
+                            /* Track */
+                            &::-webkit-scrollbar-track {
+                                background: #f00202;
+                                display: none;
+
+                            }
+
+                            /* Handle */
+                            &::-webkit-scrollbar-thumb {
+                                background: #ffffff;
+                                border-radius: 4px;
+                                width: 1px;
+                            }
+
+                            /* Handle on hover */
+                            &::-webkit-scrollbar-thumb:hover {
+                                background: #555;
+                            }
+                        }
+
+                        img {
+                            width: 50%;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            p {
+                                max-width: 100px;
+                            }
+                        }
+                    }
+
+
+                    //for user that are logged in
+                    &.user {
+                        flex-direction: row-reverse;
+
+                        .massageContent {
+                            align-items: flex-end;
+
+                            p {
+                                background-color: skyblue;
+                                border-radius: 10px 0 10px 10px;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            //user message input
+            .input {
+                background-color: rgba(0, 0, 0, 0.6);
+
+                height: 2.5rem;
+                padding: .5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+
+                textarea {
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    color: white;
+
+
+                    &::placeholder {
+                        color: rgb(171, 171, 171);
+                    }
+
+                }
+
+
+                .send {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    button {
+                        border: none;
+                        background-color: transparent;
+                        padding: 5px;
+                        color: #81d7ff;
+                        cursor: pointer;
+
+                        i {
+                            font-size: 1.2rem;
+                        }
+                    }
+
+                    img {
+                        height: 1.2rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
