@@ -7,11 +7,13 @@ import Input from "./Input";
 import { ChatsContext } from "../context/ChatsContext";
 
 const Chat = () => {
+  //getting receiver data from ChatContext
   const { data } = useContext(ChatsContext);
 
   return (
     <div className="chat">
       <div className="chatInfo">
+        {/* showing receiver name */}
         <span>{data.user.displayName}</span>
         <div className="chatIcons">
           <img src={Camera} alt="" />

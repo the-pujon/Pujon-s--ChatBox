@@ -1,4 +1,4 @@
-import { type } from "@testing-library/user-event/dist/type";
+//import { type } from "@testing-library/user-event/dist/type";
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -12,6 +12,7 @@ const Chats = () => {
 
   const { dispatch } = useContext(ChatsContext);
 
+  //for getting data from userChat where user and receiver last message stored
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -25,13 +26,10 @@ const Chats = () => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
+  //store receiver info into ChatContext so that it can use anywhere in this project
   const handleClick = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-
-  Object.entries(chats)
-    ?.sort((a, b) => b[1].date - a[1].date)
-    .map((chat) => console.log(chat[1].lastMassage?.text.slice(0, 5)));
 
   return (
     <div className="chat">

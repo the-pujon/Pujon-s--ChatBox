@@ -25,15 +25,15 @@ const Input = () => {
 
   const { data } = useContext(ChatsContext);
 
-  console.log(data.receiverId);
-
   const handleClick = async () => {
+    //if user send a file
     if (file) {
       const storageRef = ref(storage, uuidv4());
 
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
+            //update with file in chat db
             await updateDoc(doc(db, "chats", data.chatId), {
               massages: arrayUnion({
                 id: uuidv4(),
@@ -50,7 +50,10 @@ const Input = () => {
           }
         });
       });
-    } else {
+    }
+    //if user don't send any image
+    else {
+      //update without file in chat db
       await updateDoc(doc(db, "chats", data.chatId), {
         massages: arrayUnion({
           id: uuidv4(),
@@ -62,6 +65,7 @@ const Input = () => {
       });
     }
 
+    //update user last message in current user(sender) db.so it can show at sidebar
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMassage"]: {
         text,
@@ -70,6 +74,7 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
+    //update user last message in receiver db.so it can show at sidebar
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMassage"]: {
         text,
@@ -78,6 +83,7 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
+    //after send empty text field and files field
     setText("");
     setFile(null);
   };

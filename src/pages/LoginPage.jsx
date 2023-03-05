@@ -1,23 +1,35 @@
 import React, { useState } from "react";
+
+//for navigate
 import { useNavigate } from "react-router";
 import Button from "../components/button/Button";
+
+//firebase function
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";
+
+//for my logo
 import pujon from "../images/logo.png";
 
+//main function
 const LoginPage = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
+  //function for when form submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //for taking all input value from input field
     const email = e.target[0].value;
     const password = e.target[1].value;
 
+    //firebase
     try {
+      //for login user
       await signInWithEmailAndPassword(auth, email, password);
 
+      //navigate to home
       navigate("/");
     } catch (err) {
       setErr(true);
@@ -49,8 +61,12 @@ const LoginPage = () => {
             />
 
             <Button title="LogIn" />
-            {err && <p>There is an error</p>}
-            <p>
+            {err && (
+              <p style={{ color: "red", textAlign: "center" }}>
+                There is an error
+              </p>
+            )}
+            <p style={{ textAlign: "center" }}>
               Don't have an account?{" "}
               <span onClick={() => navigate("/register")}>register</span>
             </p>

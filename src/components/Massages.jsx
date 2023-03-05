@@ -9,6 +9,7 @@ const Massages = () => {
 
   const [massages, setMassages] = useState([]);
 
+  //get all data from chat db and send it to message component
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMassages(doc.data().massages);

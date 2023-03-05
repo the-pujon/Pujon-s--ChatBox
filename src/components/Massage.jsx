@@ -1,25 +1,17 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatsContext } from "../context/ChatsContext";
-import User1 from "../images/User-1.jpg";
 
 const Massage = ({ massage }) => {
+  //getting current user from authentication
   const { currentUser } = useContext(AuthContext);
 
-  const serverDate = new Date(massage.date.seconds * 1000).getTime();
-
+  //getting receiver data from chatContext
   const { data } = useContext(ChatsContext);
 
-  const Localdate = new Date().getTime();
-
-  console.log(serverDate);
-  console.log(Localdate);
-
-  const date = Math.abs(serverDate - Localdate);
-
-  console.log(new Date(date));
   const ref = useRef();
 
+  //for getting update message
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [massage]);

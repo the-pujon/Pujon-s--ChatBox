@@ -1,31 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
+//importing button
 import Button from "../../components/button/Button";
+
+//for my logo
 import pujon from "../../images/logo.png";
 
 import addAvatar from "../../images/addAvatar.png";
+
+//for firebase function
 import { auth, storage, db } from "../../Firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+
+//for navigate
 import { useNavigate } from "react-router";
 
+//main function
 const RegisterPage = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
+  //function for when form submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //taking value from all input field
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
 
+    //firebase
     try {
+      //for creating new user
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res);
-      console.log(file);
 
+      //for storing image
       const storageRef = ref(storage, displayName);
 
       await uploadBytesResumable(storageRef, file).then(() => {
@@ -36,6 +48,7 @@ const RegisterPage = () => {
               displayName,
               photoURL: downloadURL,
             });
+
             //create user on firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
@@ -47,6 +60,7 @@ const RegisterPage = () => {
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
 
+            //navigate to login page after creating user
             navigate("/login");
           } catch (err) {
             console.log(err);
@@ -98,10 +112,13 @@ const RegisterPage = () => {
                 style={{ display: "none" }}
               />
             </div>
-            {/*<button type="submit">Register</button>*/}
             <Button title="Register" />
-            {err && <p>There is an error</p>}
-            <p>
+            {err && (
+              <p style={{ color: "red", textAlign: "center" }}>
+                There is an error
+              </p>
+            )}
+            <p style={{ textAlign: "center" }}>
               Already have na account?{" "}
               <span onClick={() => navigate("/login")}>login</span>
             </p>
